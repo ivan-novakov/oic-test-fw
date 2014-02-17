@@ -2,7 +2,7 @@
 return array(
     
     'server_info' => array(
-        'session_cookie_name' => 'PHPSESSID'
+        'session_cookie_name' => 'oicserver'
     ),
     
     'client_info' => array(

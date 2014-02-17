@@ -83,7 +83,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             }
         }
         
-        $this->assertTrue($sessionCookieExists);
+        $this->assertTrue($sessionCookieExists, sprintf("Missing session cookie '%s'", $serverInfo['session_cookie_name']));
         
         return array(
             'code' => $queryVars['code'],
