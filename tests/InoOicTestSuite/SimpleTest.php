@@ -2,6 +2,7 @@
 
 namespace InoOicTestSuite;
 
+use InoOicClient\Oic\Authorization\Uri\Generator;
 use InoOicClient\Client\ClientInfo;
 use InoOicClient\Oic\Authorization\State;
 use InoOicClient\Oic\Authorization;
@@ -42,10 +43,12 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     public function testAuthorize()
     {
         $clientInfo = $this->getClientInfo();
-        
         $stateManager = new State\Manager();
         
-        $dispatcher = new Authorization\Dispatcher();
+        $uriGenerator = new Generator();
+        $uriGenerator->setRequiredParams(array());
+        
+        $dispatcher = new Authorization\Dispatcher($uriGenerator);
         $dispatcher->setStateManager($stateManager);
         
         $request = new Authorization\Request($clientInfo, 'code', 'openid profile email');
@@ -61,11 +64,19 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $request->setUri($uri);
         $response = $client->send($request);
         
+        $statusCode = $response->getStatusCode();
+        if ($statusCode !== 302) {
+            $this->fail(sprintf("Server returned status code '%s' with content:\n---\n%s\n---\n", $statusCode, $response->getBody()));
+        }
+        
         $locationHeader = $response->getHeaders()->get('Location');
         $this->assertInstanceOf('Zend\Http\Header\Location', $locationHeader);
         
         /* @var $locationHeader \Zend\Http\Header\Location */
         $uri = new \Zend\Uri\Uri($locationHeader->getUri());
+        
+        // FIXME - check if the redirect URI is correct
+        
         $queryVars = $uri->getQueryAsArray();
         
         $this->assertArrayHasKey('code', $queryVars);
