@@ -6,12 +6,12 @@ return array(
     ),
     
     'client_info' => array(
-        'client_id' => 'oic-test-fw-instance-chabruz',
+        'client_id' => 'testclientid',
         'redirect_uri' => 'https://virtual',
         
-        'authorization_endpoint' => 'https://hroch.cesnet.cz/devel/oic-server/oic/authorize',
-        'token_endpoint' => 'https://hroch.cesnet.cz/devel/oic-server/oic/token',
-        'user_info_endpoint' => 'https://hroch.cesnet.cz/devel/oic-server/oic/userinfo',
+        'authorization_endpoint' => 'https://oic.example.org/authorize',
+        'token_endpoint' => 'https://oic.example.org/token',
+        'user_info_endpoint' => 'https://oic.example.org/userinfo',
         
         'authentication_info' => array(
             'method' => 'client_secret_basic',

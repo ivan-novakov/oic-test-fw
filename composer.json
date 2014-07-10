@@ -1,6 +1,6 @@
 {
     "require": {
         "ivan-novakov/php-openid-connect-client" : "~0.1",
-        "phpunit/phpunit": "~3.7"
+        "phpunit/phpunit": "~4.1"
     }
 }
