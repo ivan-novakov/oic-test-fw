@@ -3,3 +3,4 @@
 .settings
 composer.lock
 vendor
+config/oic-test-fw.config.php
